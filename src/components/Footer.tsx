@@ -1,3 +1,4 @@
+"use client"
 import { ReactNode } from "react";
 import Link from "next/link";
 import { Logo } from "./Logo";
@@ -33,9 +34,19 @@ type FooterLinkProps = {
 };
 
 function FooterLink({ href, children }: FooterLinkProps) {
+  const handleClick = (e: React.MouseEvent) => {
+    // لیست صفحات در حال توسعه
+    const inDevelopmentPages = ["/products", "/about", "/support", "/contact"];
+    if (inDevelopmentPages.includes(href)) {
+      e.preventDefault(); // جلوگیری از رفتن به صفحه
+      alert("در حال توسعه هست");
+    }
+  };
+
   return (
     <Link
       href={href}
+      onClick={handleClick}
       className="text-sm transition-colors hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
     >
       {children}

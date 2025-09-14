@@ -55,19 +55,20 @@ function CameraController() {
     camera.lookAt(targetRef.current);
   });
 
-  useEffect(() => {
-    if (prefersReducedMotion) return;
+ useEffect(() => {
+  if (prefersReducedMotion) return;
 
-    const handleMouseMove = (event: MouseEvent) => {
-      mouseRef.current.x = event.clientX / size.width;
-      mouseRef.current.y = event.clientY / size.height;
-    };
+  const handleMouseMove = (event: MouseEvent) => {
+    mouseRef.current.x = event.clientX / size.width;
+    mouseRef.current.y = event.clientY / size.height;
+  };
 
-    if (typeof window !== "undefined") {
-      window.addEventListener("mousemove", handleMouseMove);
-      return () => window.removeEventListener("mousemove", handleMouseMove);
-    }
-  }, [size]);
+  if (typeof window !== "undefined") {
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }
+}, [size, prefersReducedMotion]);  
+
 
   return null;
 }
